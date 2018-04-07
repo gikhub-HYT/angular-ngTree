@@ -1,0 +1,32 @@
+<ul class="ngTree">
+    <li ng-repeat="node in treenodes track by $index" onselectstart="return false;" ng-mousedown="mousedown(node,$event)">
+        <i class="expand" ng-click="expand(node,this)" ng-class="{true:'{{expandIcon}}',false:'{{unexpandIcon}}'}[isOpen]" ng-style="expandStyle"></i>
+        <i class="checkbox" ng-click="checkbox(node,this)" ng-class="{'{{checkedIcon}}':node.isChecked,'{{uncheckedIcon}}':!node.isChecked,'{{halfcheckedIcon}}':node.halfChecked}"
+            ng-style="checkboxStyle" ng-show="showCheckbox&&!node.isLoading"></i>
+        <i class="fa fa-spinner loading" aria-hidden="true" ng-show="node.isLoading" ng-style='loadingStyle'></i>
+        <span class="nodeName">
+            <i class="file" ng-class="{'{{fileOpenIcon}}':isOpen, '{{fileCloseIcon}}':!isOpen,'{{noChildIcon}}':node.children.length === 0}"
+                ng-style="fileStyle" ng-show="showFileIcon&&!node.isLoading"> </i>
+            <span class="name" ng-show="!isInRename " ng-style="{'color':'{{labelStyle}}','background':this.slecteColor}" ng-click="select(node,this)">
+                {{node[labelName]}}</span>
+            <input type="text " ng-model="node[labelName]" ng-show="isInRename " ng-blur="blur(node) " onmouseover="this.focus() " placeholder="名称不能为空 "
+                ng-keyup="enter(node,$event)" ng-sytyle="inputbox">
+            <span class="fn" ng-show="!isInRename ">
+                <i class="{{renameIcon}}" ng-click="rename(node) " ng-show="showRename||showToolGroup " ng-style="renameStyle"></i>
+                <i class="{{removeIcon}} " ng-click="remove(node,$index) " ng-show="showRemove||showToolGroup " ng-style="removeStyle"></i>
+                <i class="{{appendchildIcon}}" ng-click="appendChild(node) " ng-show="showAppendchild||showToolGroup " ng-style="appendStyle"></i>
+            </span>
+        </span>
+        <!-- 右键点击功能暂未完成-->
+        <div class="rightPanel " ng-if=false>
+            <div class="item" ng-click="appendChild(node)">
+                <i class="fa fa-caret-left fa-lg"></i> 增加
+            </div>
+            <div class="item " ng-click="remove(node,$index)">删除</div>
+            <div class="item" ng-click="rename(node)">修改</div>
+        </div>
+        <ng-tree treenodes='node.children' ng-show='isOpen' setting="setting" on-expand='onExpand' on-checkbox='onCheckbox' on-appendchild='onAppendchild'
+            on-remove='onRemove' on-rename='onRename'>
+        </ng-tree>
+    </li>
+</ul>

@@ -1,0 +1,106 @@
+.ngTree * {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-family: Verdana, Arial, Helvetica, AppleGothic, sans-serif;
+}
+
+.ngTree {
+  margin: 0;
+  padding: 5px;
+  color: #333;
+  max-width: 100px;
+}
+
+.ngTree li {
+  position: relative;
+  padding: 0;
+  margin: 5px 0;
+  list-style: none;
+  line-height: 14px;
+  text-align: left;
+  font-size: inherit;
+  white-space: nowrap;
+  outline: 0;
+  cursor: pointer;
+  width: inherit;
+}
+
+.ngTree li ul {
+  margin: 0;
+  padding: 0 0 0 18px;
+  font-size: inherit;
+}
+
+.ngTree li i {
+  display: inline-block;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+}
+/* 加载动画 */
+@keyframes loading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ngTree .loading {
+  animation: loading 1s infinite;
+}
+
+.ngTree li .fn {
+  display: none;
+}
+
+.ngTree li .checkbox:hover + .nodeName > .fn,
+.ngTree li .nodeName:hover > .fn {
+  display: inline;
+}
+
+.ngTree li:hover .rightPanel {
+  display: block;
+}
+
+.ngTree li .nodeName input {
+  width: 80%;
+  height: 16px;
+  font-size: 16px;
+}
+
+.ngTree li .rightPanel {
+  display: block;
+  position: absolute;
+  width: inherit;
+  right: -70%;
+  top: -10px;
+  background: gold;
+
+  border: solid gray 1px;
+  border-radius: 5px;
+}
+
+.ngTree li .rightPanel .item {
+  margin: 0;
+  padding: 0;
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  text-align: center;
+  border-bottom: solid gray 1px;
+}
+
+.ngTree li .rightPanel .item:last-of-type {
+  border-bottom: none;
+}
+
+.ngTree li .rightPanel .item > .fa {
+  position: absolute;
+  top: 8px;
+  left: -8px;
+  font: 30px !important;
+}
