@@ -1,6 +1,6 @@
 <ul class="ngTree">
     <li ng-repeat="node in treenodes track by $index" onselectstart="return false;" ng-mousedown="mousedown(node,$event)">
-        <i class="expand" ng-click="expand(node,this)" ng-class="{true:'{{expandIcon}}',false:'{{unexpandIcon}}'}[isOpen]" ng-style="expandStyle"></i>
+        <i class="expand" ng-click="expand(node,this)" ng-class="{true:'{{expandIcon}}',false:'{{unexpandIcon}}'}[isOpen]" ng-style="expandStyle" ng-show="!node.isLoading"></i>
         <i class="checkbox" ng-click="checkbox(node,this)" ng-class="{'{{checkedIcon}}':node.isChecked,'{{uncheckedIcon}}':!node.isChecked,'{{halfcheckedIcon}}':node.halfChecked}"
             ng-style="checkboxStyle" ng-show="showCheckbox&&!node.isLoading"></i>
         <i class="fa fa-spinner loading" aria-hidden="true" ng-show="node.isLoading" ng-style='loadingStyle'></i>
