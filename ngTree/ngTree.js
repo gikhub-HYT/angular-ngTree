@@ -350,7 +350,7 @@ angular
   .directive("ngTree", function() {
     return {
       restrict: "EA",
-      templateUrl: "./angular-ngTree/ngTree.html",
+      templateUrl: "./ngTree/ngTree.html",
       replace: false,
       controller: "treeCtrl",
       scope: {
