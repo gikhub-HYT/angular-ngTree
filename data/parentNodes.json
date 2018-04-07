@@ -1,0 +1,37 @@
+{
+    "tree": [{
+            "name": "节点1",
+            "id": 1,
+            "children": [{
+                    "name": "节点11",
+                    "id": 11,
+                    "children": []
+                },
+                {
+                    "name": "节点12",
+                    "id": 12,
+                    "children": [{
+                        "name": "节点111",
+                        "id": 121,
+                        "children": []
+                    }]
+                }
+            ]
+
+        },
+        {
+            "name": "节点2",
+            "id": 2,
+            "children": []
+
+
+        },
+        {
+            "name": "节点3",
+            "id": 3,
+            "children": []
+
+        }
+
+    ]
+}

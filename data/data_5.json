@@ -1,0 +1,32 @@
+[
+  {
+    "name": "节点1",
+    "id": "m0",
+    "children": [],
+    "isChecked": false
+  },
+  {
+    "name": "节点2",
+    "id": "m1",
+    "children": [],
+    "isChecked": false
+  },
+  {
+    "name": "节点3",
+    "id": "m2",
+    "children": [],
+    "isChecked": false
+  },
+  {
+    "name": "节点4",
+    "id": "m3",
+    "children": [],
+    "isChecked": false
+  },
+  {
+    "name": "节点5",
+    "id": "m4",
+    "children": [],
+    "isChecked": false
+  }
+]
