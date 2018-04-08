@@ -205,7 +205,9 @@ angular
           color: "gold"
         },
         expand: {
-          color: "purple"
+          color: "purple",
+          'font-size':'12px',
+          'line-height':'12px'
         },
         checkbox: {
           color: "gold"

@@ -37,17 +37,17 @@ angular
       return list;
     };
   })
-  .controller("treeCtrl", function($scope, config) {
+  .controller("ngTreeCtrl", function($scope, config) {
     var treeConfig = {
       label: "name",
       childrenName: "children",
       multiSelect: false,
-      showCheckbox: false,
-      showFileIcon: false,
-      showToolGroup: false,
-      showRenameIcon: false,
-      showRemoveIcon: false,
-      showAppendIcon: false,
+      checkboxEnable: false,
+      fileWithIcon: false,
+      toolGroupEnable: false,
+      renameEnable: false,
+      removeEnable: false,
+      appendEnable: false,
       injectClass: {
         unexpandIcon: "fa fa-plus",
         expandIcon: "fa fa-minus",
@@ -100,15 +100,15 @@ angular
     //用于控制当前节点是否展开子节点
     $curNodeScope.isOpen = false;
     // 控制是否使用复选框
-    $scope.showCheckbox = treeConfig.showCheckbox;
+    $scope.showCheckbox = treeConfig.checkboxEnable;
     //是否显示文件图标
-    $scope.showFileIcon = treeConfig.showFileIcon;
+    $scope.showFileIcon = treeConfig.fileWithIcon;
     // 默认显示增删改工具栏
-    $curNodeScope.showToolGroup = treeConfig.showToolGroup;
+    $curNodeScope.showToolGroup = treeConfig.toolGroupEnable;
     // 控制单个工具元素的显示开关
-    $curNodeScope.showRename = treeConfig.showRenameIcon;
-    $curNodeScope.showRemove = treeConfig.showRemoveIcon;
-    $curNodeScope.showAppendchild = treeConfig.showAppendIcon;
+    $curNodeScope.showRename = treeConfig.renameEnable;
+    $curNodeScope.showRemove = treeConfig.removeEnable;
+    $curNodeScope.showAppendchild = treeConfig.appendEnable;
     /**
      * 图标配置
      */
@@ -212,7 +212,7 @@ angular
     $curNodeScope.appendChild = function(node) {
       var children = node[treeConfig.childrenName];
       if (angular.isFunction($scope.onAppendchild)) {
-        $scope.onAppendchild(node, $curNodeScope);
+        $scope.onAppend(node, $curNodeScope);
 
         var cancelWatch = $curNodeScope.$watch(
           function() {
@@ -240,17 +240,13 @@ angular
         var newNode = angular.copy(childNode);
         newNode.name = newNode.name + children.length;
         newNode.isChecked = node.isChecked;
+        newNode.halfChecked = false;
         children.push(newNode);
       }
-      //  向子域传递消息
-      $curNodeScope.$broadcast("appendChild");
       // 添加子节点是自身展开
       $curNodeScope.isOpen = true;
     };
-    //  监听添加子节点事件,使得子节点处于相同的选中状态
-    $curNodeScope.$on("appendChild", function(event, data) {
-      event.currentScope.node.isChecked = event.targetScope.node.isChecked;
-    });
+
     // 删除节点
     $curNodeScope.remove = function(node, $index) {
       //  执行删除回调
@@ -352,16 +348,15 @@ angular
       restrict: "EA",
       templateUrl: "./ngTree/ngTree.html",
       replace: false,
-      controller: "treeCtrl",
+      controller: "ngTreeCtrl",
       scope: {
         treenodes: "=",
-        selectData: "=?",
         setting: "=?",
         onExpand: "=?",
         onCheckbox: "=?",
         onRename: "=?",
         onRemove: "=?",
-        onAppendchild: "=?",
+        onAppend: "=?",
         onSelect: "=?"
       }
     };
