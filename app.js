@@ -1,11 +1,6 @@
 angular
   .module("app", ["ngTree"])
-  .value('data',{
-    data_1:[],
-    data_2:[],
-    data_3:[],
-    data_4:[],
-  })
+   
   .constant("url", {
     data_5: "data/data_5.json",
     data_10: "data/data_10.json",
@@ -19,19 +14,8 @@ angular
     data_5000: "data/data_5000.json",
     data_10000: "data/data_10000.json"
   })
-  .controller("treeController", function($scope, data) {
-    $scope.$watch(function(){
-      return data;
-    },function(){
-      $scope.data1=data.data_1;
-      $scope.data2=data.data_2;
-      $scope.data3=data.data_3;
-      $scope.data4=data.data_4;
-    },true);
    
-    
-  })
-  .controller("treeController1", function($scope, $http, url, treeDataFormatt,data) {
+  .controller("treeController1", function($scope, $http, url, treeDataFormatt ) {
     $scope.setting1 = {
       multiSelect: true,
       style: {
@@ -64,11 +48,11 @@ angular
 
     // 最终提交的数据
     $scope.submit1 = function() {
-      data.data_1 = treeDataFormatt.toList($scope.treeRootNodes1,1);
-      console.log("data1", data.data_1);
+      data  = treeDataFormatt.toList($scope.treeRootNodes1,1);
+      console.log("data1", data );
     };
   })
-  .controller("treeController2", function($scope, $http, url, treeDataFormatt,data) {
+  .controller("treeController2", function($scope, $http, url, treeDataFormatt ) {
     $scope.setting2 = {
       showFileIcon: false,
       showCheckbox: false,
@@ -103,11 +87,11 @@ angular
 
     // 最终提交的数据
     $scope.submit = function(flag) {
-      data.data_2 = treeDataFormatt.toList($scope.treeRootNodes2,1);
-      console.log("data2",  data.data_2);
+      data  = treeDataFormatt.toList($scope.treeRootNodes2,1);
+      console.log("data2",  data );
     };
   })
-  .controller("treeController3", function($scope, $http, url, treeDataFormatt,data) {
+  .controller("treeController3", function($scope, $http, url, treeDataFormatt ) {
     $scope.setting3 = {
       checkboxEnable: true,
       injectClass: {
@@ -148,11 +132,11 @@ angular
     };
     // 最终提交的数据
     $scope.submit3 = function() {
-      data.data_3 = treeDataFormatt.toList($scope.treeRootNodes3);
-      console.log("data3", data.data_3);
+      data  = treeDataFormatt.toList($scope.treeRootNodes3);
+      console.log("data3", data );
     };
   })
-  .controller("treeController4", function($scope, $http, url, treeDataFormatt,data) {
+  .controller("treeController4", function($scope, $http, url, treeDataFormatt ) {
     $scope.setting4 = {
       injectClass: {
         
@@ -203,8 +187,8 @@ angular
     };
     // 最终提交的数据
     $scope.submit = function(flag) {
-      data.data_4 = treeDataFormatt.toList($scope.treeRootNodes4);
-      console.log("data4", data.data_4);
+      data  = treeDataFormatt.toList($scope.treeRootNodes4);
+      console.log("data4", data );
     };
   })
     
