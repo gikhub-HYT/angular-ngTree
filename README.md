@@ -258,7 +258,6 @@ app.controller("treeController", function($scope, $http, url, treeDataFormatt) {
 ```
  <div ng-tree treenodes="treeRootNodes" on-expand="onExpand" setting='setting'> </div>
 ```
-
 ![show](https://gitee.com/uploads/images/2018/0409/152737_defcadac_1384885.gif "show.gif")
 
 
