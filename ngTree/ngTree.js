@@ -81,12 +81,10 @@ angular
     // 配置节点名称字段与子节点字段
     config.label = treeConfig.label;
     config.childrenName = treeConfig.childrenName;
-
     // 获取各级作用域
     var $curNodeScope = $scope.$parent;
     var $parentScope = $curNodeScope.$parent;
     var $parentNodes = $parentScope.treenodes;
-
     // 自定义名称节点名称与子节点名称
     $scope.labelName = treeConfig.label;
     $scope.childrenName = treeConfig.childrenName;
