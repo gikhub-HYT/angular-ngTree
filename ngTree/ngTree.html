@@ -25,8 +25,8 @@
             <div class="item " ng-click="remove(node,$index)">删除</div>
             <div class="item" ng-click="rename(node)">修改</div>
         </div>
-        <ng-tree treenodes='node.children' ng-show='isOpen' setting="setting" on-expand='onExpand' on-checkbox='onCheckbox' on-appendchild='onAppendchild'
-            on-remove='onRemove' on-rename='onRename'>
+        <ng-tree treenodes='node.children' ng-show='isOpen' setting="setting" on-expand='onExpand' on-checkbox='onCheckbox' on-appendchild='onAppend'
+        on-select='onSelect' on-remove='onRemove' on-rename='onRename'>
         </ng-tree>
     </li>
 </ul>
