@@ -196,7 +196,14 @@ var data = treeDataFormatt.toList($scope.treeRootNodes，1);
 
 #### 示例
 
-假设我们现在需要一棵树，需要实现按需异步载，亦即每次点击展开时再去后台请求当前节点的字节点数据，
+假设我们现在需要一棵树，需要实现按需异步载，亦即每次点击展开时再去后台请求当前节点的字节点数据,数据结构如下
+node={
+name:'父节点',
+  nodes:{
+    label:'子节点'，
+    nodes:[]
+  }
+}
 
 且我们需要节点删除功能和复选功能。我们用箭头图标来表示展开和收缩的状态。则controller.js代码如下：
 
@@ -204,6 +211,8 @@ var data = treeDataFormatt.toList($scope.treeRootNodes，1);
 app.controller("treeController", function($scope, $http, url, treeDataFormatt) {
 
     $scope.setting = {
+      label:'name',
+      childrenName:'nodes',
       checkboxEnable: true, //开启复选功能
       removeEnable: true, //开启删除功能
       injectClass: {
@@ -250,6 +259,7 @@ app.controller("treeController", function($scope, $http, url, treeDataFormatt) {
  <div ng-tree treenodes="treeRootNodes" on-expand="onExpand" setting='setting'> </div>
 ```
 
-![效果图](https://gitee.com/uploads/images/2018/0408/170933_6ce6da93_1384885.gif "ngTree.gif")
+![show](https://gitee.com/uploads/images/2018/0409/152737_defcadac_1384885.gif "show.gif")
+
 
 
