@@ -7,26 +7,21 @@ angular
   .service("treeDataFormatt", function(config) {
     var treeConfig = config;
     function findChilrenHasChecked(rootNodes, list, treeConfig, state) {
-      if (state === 0) {
-        state = "isChecked";
-      } else if (state === 1) {
-        state = "selected";
-      } else {
-        state = "isChecked";
-      }
+      if (!state) {
+        state = 0;
+      }  
       angular.forEach(rootNodes, function(node, index) {
         var currentNode = angular.copy(node);
         if (node[treeConfig.childrenName].length > 0) {
-          findChilrenHasChecked(
-            node[treeConfig.childrenName],
-            list,
-            treeConfig,
-            state
-          );
+          findChilrenHasChecked(node[treeConfig.childrenName],list,treeConfig,state);
         }
-        if (node[state] && !node.halfChecked) {
-          delete currentNode[treeConfig.childrenName];
+        if (state===0&&node['isChecked'] && !node.halfChecked) {
           list.push(currentNode);
+          delete currentNode[treeConfig.childrenName];
+        }
+        if (state===1&&node['selected'] && !node.halfChecked) {
+          list.push(currentNode);
+          delete currentNode[treeConfig.childrenName];
         }
       });
     }
@@ -52,7 +47,7 @@ angular
         unexpandIcon: "fa fa-plus",
         expandIcon: "fa fa-minus",
 
-        checkedIcon: "fa fa-check-square-o",
+        checkedIcon: "fa fa-check-square",
         halfcheckedIcon: "fa fa-minus-square-o",
         uncheckedIcon: "fa fa-square-o",
 
@@ -170,7 +165,7 @@ angular
           }
         );
       } else {
-        alert("请确保您的回调函数正确");
+        // alert("请确保您的回调函数正确");
       }
     };
     // 当前节点文字选中
@@ -188,7 +183,6 @@ angular
 
     $curNodeScope.$on("select", function(event, data) {
       // 根作用域接收子作用域消息,向所有子节点作用域广播
-      // console.log("event.currentScope", event.currentScope);
       if (!event.currentScope.$$ChildScope) {
         event.currentScope.$broadcast("removeSlecteState", {
           $id: event.targetScope.$id
@@ -200,7 +194,6 @@ angular
       if (event.currentScope.node) {
         if (event.currentScope.$id != data.$id) {
           event.currentScope.node.selected = false;
-          // console.log("移除当前选中样式");
           delete event.currentScope.slecteColor;
         }
       } else {
