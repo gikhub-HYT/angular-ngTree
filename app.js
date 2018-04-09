@@ -1,5 +1,11 @@
 angular
   .module("app", ["ngTree"])
+  .value('data',{
+    data_1:[],
+    data_2:[],
+    data_3:[],
+    data_4:[],
+  })
   .constant("url", {
     data_5: "data/data_5.json",
     data_10: "data/data_10.json",
@@ -13,14 +19,21 @@ angular
     data_5000: "data/data_5000.json",
     data_10000: "data/data_10000.json"
   })
-  .controller("treeController", function(
-    $scope,
-    $http,
-    url,
-    treeDataFormatt
-  ) {})
-  .controller("treeController1", function($scope, $http, url, treeDataFormatt) {
-    var setting1 = {
+  .controller("treeController", function($scope, data) {
+    $scope.$watch(function(){
+      return data;
+    },function(){
+      $scope.data1=data.data_1;
+      $scope.data2=data.data_2;
+      $scope.data3=data.data_3;
+      $scope.data4=data.data_4;
+    },true);
+   
+    
+  })
+  .controller("treeController1", function($scope, $http, url, treeDataFormatt,data) {
+    $scope.setting1 = {
+      multiSelect: true,
       style: {
         expand: {
           color: "red",
@@ -35,8 +48,7 @@ angular
       }
     };
 
-    $scope.setting1 = setting1;
-
+    
     // 初始化根节点
     $http.get(url.data_5).then(function(res) {
       $scope.treeRootNodes1 = res.data;
@@ -52,12 +64,12 @@ angular
 
     // 最终提交的数据
     $scope.submit1 = function() {
-      var data1 = treeDataFormatt.toList($scope.treeRootNodes1);
-      console.log("data1", data1);
+      data.data_1 = treeDataFormatt.toList($scope.treeRootNodes1,1);
+      console.log("data1", data.data_1);
     };
   })
-  .controller("treeController2", function($scope, $http, url, treeDataFormatt) {
-    var setting2 = {
+  .controller("treeController2", function($scope, $http, url, treeDataFormatt,data) {
+    $scope.setting2 = {
       showFileIcon: false,
       showCheckbox: false,
       injectClass: {
@@ -74,7 +86,7 @@ angular
       }
     };
 
-    $scope.setting2 = setting2;
+    
 
     // 初始化根节点
     $http.get(url.data_5).then(function(res) {
@@ -83,7 +95,7 @@ angular
 
     // 点击展开加载子节点
     $scope.onExpand = function(node, scope) {
-      $http.get(url.data_1000).then(function(res) {
+      $http.get(url.data_100).then(function(res) {
         var child = res.data;
         node.children = child;
       });
@@ -91,17 +103,16 @@ angular
 
     // 最终提交的数据
     $scope.submit = function(flag) {
-      var data2 = treeDataFormatt.toList($scope.treeRootNodes2);
-      console.log("data2", data2);
+      data.data_2 = treeDataFormatt.toList($scope.treeRootNodes2,1);
+      console.log("data2",  data.data_2);
     };
   })
-  .controller("treeController3", function($scope, $http, url, treeDataFormatt) {
-    var setting3 = {
-      multiSelect: true,
-      showAppendIcon: true,
+  .controller("treeController3", function($scope, $http, url, treeDataFormatt,data) {
+    $scope.setting3 = {
+      checkboxEnable: true,
       injectClass: {
-        unexpandIcon: "fa fa-plus-square-o",
-        expandIcon: "fa fa-minus-square-o"
+        unexpandIcon: "fa fa-caret-right",
+        expandIcon: "fa fa-caret-down"
       },
       style: {
         expand: {
@@ -115,43 +126,48 @@ angular
         },
         append: {
           color: "blue"
+        },
+        fileIcon:{
+          color: "blue"
+        },
+        checkbox:{
+          color: "blue"
         }
       }
     };
-
-    $scope.setting3 = setting3;
-
     // 初始化根节点
     $http.get(url.data_5).then(function(res) {
       $scope.treeRootNodes3 = res.data;
     });
-
     // 点击展开加载子节点
     $scope.onExpand = function(node, scope) {
-      $http.get(url.data_50).then(function(res) {
+      $http.get(url.data_5).then(function(res) {
         var child = res.data;
         node.children = child;
       });
     };
-
     // 最终提交的数据
     $scope.submit3 = function() {
-      var data3 = treeDataFormatt.toList($scope.treeRootNodes3, 1);
-      console.log("data3", data3);
+      data.data_3 = treeDataFormatt.toList($scope.treeRootNodes3);
+      console.log("data3", data.data_3);
     };
   })
-  .controller("treeController4", function($scope, $http, url, treeDataFormatt) {
-    var setting4 = {
+  .controller("treeController4", function($scope, $http, url, treeDataFormatt,data) {
+    $scope.setting4 = {
       injectClass: {
+        
         unexpandIcon: "fa fa-plus-square",
         expandIcon: "fa fa-minus-square"
       },
       style: {
         expand: {
-          color: "green"
+          color: "green",
         },
         selected: {
           background: "purple"
+        },
+        checkbox:{
+          color: "green"
         },
         label: {
           color: "green"
@@ -160,22 +176,18 @@ angular
           color: "green"
         },
         remove: {
-          color: "green"
+          color: "red"
         },
         append: {
-          color: "green"
+          color: "blue"
         },
         fileIcon: {
           color: "green"
         }
       },
-      showCheckbox: false,
-      showRenameIcon: true,
-      showRemoveIcon: true,
-      showFileIcon: true
+      fileWithIcon: true,
+      toolGroupEnable: true,
     };
-
-    $scope.setting4 = setting4;
 
     // 初始化根节点
     $http.get(url.data_5).then(function(res) {
@@ -191,86 +203,9 @@ angular
     };
     // 最终提交的数据
     $scope.submit = function(flag) {
-      var data4 = treeDataFormatt.toList($scope.treeRootNodes4);
-      console.log("data4", data4);
+      data.data_4 = treeDataFormatt.toList($scope.treeRootNodes4);
+      console.log("data4", data.data_4);
     };
   })
-  .controller("treeController5", function($scope, $http, url, treeDataFormatt) {
-    var setting5 = {
-      injectClass: {
-        checkedIcon: "fa fa-check-square"
-      },
-      style: {
-        label: {
-          color: "gold"
-        },
-        expand: {
-          color: "purple",
-          'font-size':'12px',
-          'line-height':'12px'
-        },
-        checkbox: {
-          color: "gold"
-        },
-        rename: {
-          color: "gold"
-        },
-        remove: {
-          color: "red"
-        },
-        append: {
-          color: "blue"
-        }
-      },
-      showCheckbox: true,
-      showToolGroup: true
-    };
-
-    $scope.setting5 = setting5;
-    // 初始化根节点
-    $http.get(url.data_5).then(function(res) {
-      $scope.treeRootNodes5 = res.data;
-    });
-    // 点击展开加载子节点
-    $scope.onExpand = function(node, scope) {
-      $http.get(url.data_10).then(function(res) {
-        var child = res.data;
-        node.children = child;
-      });
-    };
-
-    // 最终提交的数据
-    $scope.submit5 = function() {
-      var data5 = treeDataFormatt.toList($scope.treeRootNodes5);
-      console.log("data5", data5);
-    };
-  })
-  .controller("treeController6", function($scope, $http, url, treeDataFormatt) {
-    var setting6 = {
-      style: {
-        expand: {
-          color: "GREEN"
-        }
-      },
-      showCheckbox: false
-    };
-
-    $scope.setting6 = setting6;
-
-    // 初始化根节点
-    $http.get(url.data_5).then(function(res) {
-      $scope.treeRootNodes6 = res.data;
-    });
-    // 点击展开加载子节点
-    $scope.onExpand = function(node, scope) {
-      $http.get(url.data_10).then(function(res) {
-        var child = res.data;
-        node.children = child;
-      });
-    };
-    // 最终提交的数据
-    $scope.submit6 = function(flag) {
-      var data6 = treeDataFormatt.toList($scope.treeRootNodes6);
-      console.log("data6", data6);
-    };
-  });
+    
+ 
