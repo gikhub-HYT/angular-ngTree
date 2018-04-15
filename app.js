@@ -1,3 +1,4 @@
+ 
 angular
   .module("app", ["ngTree"])
    
@@ -172,6 +173,7 @@ angular
       fileWithIcon: true,
       toolGroupEnable: true,
     };
+    
 
     // 初始化根节点
     $http.get(url.data_5).then(function(res) {

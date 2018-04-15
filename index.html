@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ng-tree</title>
     <link rel="stylesheet" href="./ngTree/ngTree.css">
+     
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
     <style>
@@ -16,25 +17,20 @@
             display: flex;
             margin-top: 20px;
         }
-
         .container .box {
-
             flex: 1;
             box-sizing: border-box;
         }
     </style>
 </head>
 
-<body  >
+<body>
 
     <div class="container" >
         <div class="box" ng-controller="treeController1">
             <div ng-tree treenodes="treeRootNodes1" on-expand="onExpand" setting='setting1' on-checkbox="check" ng-if="treeRootNodes1">
             </div>
-
             <button ng-click="submit1()">提交选中数据</button>
-          
-
         </div>
         <div class="box" ng-controller="treeController2">
             <div ng-tree treenodes="treeRootNodes2" on-expand="onExpand" setting='setting2' on-checkbox="check"> </div>
@@ -48,13 +44,9 @@
         </div>
         <div class="box" ng-controller="treeController4">
             <div ng-tree treenodes="treeRootNodes4" on-expand="onExpand" setting='setting4' on-checkbox="check"> </div>
-
             <button ng-click="submit4()">提交选中数据</button>
-            
         </div>
     </div>
-    
-    
 </body>
 
 <script src="angular.js "></script>
